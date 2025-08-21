@@ -311,10 +311,9 @@
     <header class="sticky top-0 bg-white shadow-md z-50 transition-transform duration-300">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center logo-container">
-                <div
-                    class="h-14 w-14 rounded-full bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] flex items-center justify-center mr-3">
-                    <i class="fas fa-calculator text-white text-2xl"></i>
-                </div>
+                <img src="TekoPyae.png"
+                    alt="Logo de ECOPAPER S.A. mostrando elementos de papel reciclado con hojas verdes"
+                    class="h-16 mr-3">
                 <span class="text-2xl font-bold text-[var(--primary)]">TEKO<span
                         class="text-[var(--secondary)]">PYA'E</span></span>
             </div>
@@ -777,7 +776,7 @@
         const closeQrModal = document.querySelector('.close-qr-modal');
 
         // Generar código QR
-        const url = `https://ejemplo.com/tekopyae`;
+        const url = `https://medinaenzo98.github.io/TekoPyae.html`;
         const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(url)}`;
 
         // Al hacer clic en el logo

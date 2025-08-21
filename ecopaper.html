@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOPAPER S.A. - Librería Ecológica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)), url('https://placehold.co/1920x1080') no-repeat center center;
+            background-size: cover;
+        }
+
+        .eco-green {
+            color: #2e8b57;
+        }
+
+        .eco-bg {
+            background-color: #e8f5e9;
+        }
+        /* Modal para QR ampliado - Visualizador de imagen */
+        .qr-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .qr-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .qr-modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            width: 60%;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .qr-modal img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .close-qr-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .close-qr-modal:hover {
+            background: #0a3a5a;
+            transform: scale(1.1);
+        }
+
+        .logo-container {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .qr-modal-text {
+            color: #333;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body class="text-gray-800">
+    <!-- Header -->
+    <header class="sticky top-0 bg-white shadow-md z-50 transition-transform duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo placeholder - puedes reemplazar esto -->
+            <div class="flex items-center logo-container">
+                <img src="EcoPaper.jpg"
+                    alt="Logo de ECOPAPER S.A. mostrando elementos de papel reciclado con hojas verdes"
+                    class="h-16 mr-3">
+                <span class="text-2xl font-bold eco-green">ECOPAPER S.A.</span>
+            </div>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-8">
+                    <li><a href="#inicio" class="hover:underline font-medium">Inicio</a></li>
+                    <li><a href="#mision" class="hover:underline font-medium">Misión/Visión</a></li>
+                    <li><a href="#valores" class="hover:underline font-medium">Valores</a></li>
+                    <li><a href="#contacto" class="hover:underline font-medium">Contacto</a></li>
+                </ul>
+            </nav>
+            <button class="md:hidden">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero h-96 flex items-center text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">"Reciclamos el pasado, creamos el futuro"</h1>
+            <p class="text-xl md:text-2xl">Productos de librería ecológicos para un Paraguay sostenible</p>
+        </div>
+    </section>
+
+    <!-- Misión/Visión Section -->
+    <section id="mision" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 eco-green">Nuestra Misión y Visión</h2>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="p-8 eco-bg rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-4 eco-green">Misión</h3>
+                    <p class="text-gray-700">Comercializar productos de librería elaborados con materiales ecológicos,
+                        promoviendo una cultura sostenible mediante la concienciación sobre el uso responsable de los
+                        recursos naturales y el compromiso colectivo hacia un entorno más limpio y saludable.</p>
+                </div>
+                <div class="p-8 eco-bg rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-4 eco-green">Visión</h3>
+                    <p class="text-gray-700">Ser una empresa referente en productos ecológicos que con creatividad e
+                        innovación demuestra su compromiso con el medio ambiente generando impacto positivo en el
+                        planeta. Inspirar a otras empresas y consumidores a optar por alternativas responsables,
+                        reduciendo el desperdicio de papel y fomentando una economía circular.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Valores Section -->
+    <section id="valores" class="py-16 eco-bg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 eco-green">Nuestros Valores</h2>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4 eco-green">♻️</div>
+                    <h3 class="text-xl font-semibold mb-2">Sostenibilidad</h3>
+                    <p class="text-gray-700">Priorizamos el uso de materiales reciclados y prácticas ecológicas para
+                        reducir el impacto ambiental.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4 eco-green">💡</div>
+                    <h3 class="text-xl font-semibold mb-2">Innovación</h3>
+                    <p class="text-gray-700">Buscamos constantemente nuevas formas de integrar prácticas sostenibles y
+                        creativas.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4 eco-green">🤝</div>
+                    <h3 class="text-xl font-semibold mb-2">Responsabilidad</h3>
+                    <p class="text-gray-700">Nos comprometemos con la educación ambiental y hábitos de consumo
+                        responsables.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4 eco-green">⭐</div>
+                    <h3 class="text-xl font-semibold mb-2">Calidad</h3>
+                    <p class="text-gray-700">Ofrecemos productos duraderos y funcionales, amigables con el entorno.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4 eco-green">🌱</div>
+                    <h3 class="text-xl font-semibold mb-2">Conciencia</h3>
+                    <p class="text-gray-700">Promovemos el cambio positivo a través de la toma de conciencia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto" class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">ECOPAPER S.A.</h3>
+                    <p>Librería ecológica comprometida con el medio ambiente y el desarrollo sostenible.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contacto</h3>
+                    <p>Email: info@ecopaper.com.py</p>
+                    <p>Teléfono: +595 XX XXXX XXX</p>
+                    <p>Asunción, Paraguay</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Redes Sociales</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-green-300">Facebook</a>
+                        <a href="#" class="hover:text-green-300">Instagram</a>
+                        <a href="#" class="hover:text-green-300">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2023 ECOPAPER S.A. - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil sencillo
+        document.querySelector('button').addEventListener('click', function () {
+            document.querySelector('nav').classList.toggle('hidden');
+        });
+    </script>
+    <div class="qr-modal" id="qrModal">
+        <div class="qr-modal-content">
+            <button class="close-qr-modal">X</button>
+            <img id="qr-modal-img" alt="Código QR de SOLERTIA">
+            <p class="qr-modal-text">Escanea para visitar nuestra página web</p>
+        </div>
+    </div>
+    <script>
+        // Funcionalidad para abrir el modal del QR al hacer clic en el logo
+        const logoContainer = document.querySelector('.logo-container');
+        const qrModal = document.getElementById('qrModal');
+        const qrModalImg = document.getElementById('qr-modal-img');
+        const closeQrModal = document.querySelector('.close-qr-modal');
+
+        // Generar código QR
+        const url = `https://medinaenzo98.github.io/ecopaper.html`;
+        const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(url)}`;
+
+        // Al hacer clic en el logo
+        logoContainer.addEventListener('click', () => {
+            qrModalImg.src = qrSrc;
+            qrModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Previene el scroll
+        });
+
+        // Cerrar modal al hacer clic en el botón
+        closeQrModal.addEventListener('click', () => {
+            qrModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Cerrar modal al hacer clic fuera del contenido
+        qrModal.addEventListener('click', (e) => {
+            if (e.target === qrModal) {
+                qrModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Cerrar modal con la tecla Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && qrModal.classList.contains('active')) {
+                qrModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+    <script>
+        const header = document.querySelector('header');
+        let lastScrollY = window.scrollY;
+        let isMouseNearTop = false;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+
+            if (!isMouseNearTop) {
+                if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                    // Scroll hacia abajo → ocultar
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    // Scroll hacia arriba → mostrar
+                    header.style.transform = 'translateY(0)';
+                }
+            }
+
+            lastScrollY = currentScrollY;
+        });
+
+        // Mostrar el header si el mouse se acerca a la parte superior
+        document.addEventListener('mousemove', (e) => {
+            if (e.clientY < 50) {
+                isMouseNearTop = true;
+                header.style.transform = 'translateY(0)';
+            } else {
+                isMouseNearTop = false;
+            }
+        });
+    </script>
+</body>
+
+</html>
