@@ -1,0 +1,78 @@
+body {
+  font-family: sans-serif;
+  background-color: #f0e6d2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.contenedor-juego {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.puntuacion-container {
+  font-size: 1.5rem;
+  color: #333;
+  margin-top: 15px;
+}
+
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 15px;
+  width: 300px;
+  height: 300px;
+  margin: 20px auto;
+}
+
+.agujero {
+  background-color: #5d4037;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.agujero.visible {
+  cursor: pointer;
+}
+
+.topo {
+  background-color: #0b6777;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: -100%; /* Oculto por defecto */
+  transition: bottom 0.2s ease-in-out;
+}
+
+.agujero.visible .topo {
+  bottom: 0; /* Visible */
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
