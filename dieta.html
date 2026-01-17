@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Protein Py - Tracker</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #f4f4f9; padding: 20px; color: #333; }
+        .card { background: white; padding: 15px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h2 { color: #2c3e50; font-size: 1.2rem; }
+        button { background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 10px; width: 100%; font-size: 1rem; font-weight: bold; }
+        .stock-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #eee; }
+        .day-box { border-left: 4px solid #27ae60; padding-left: 10px; margin-bottom: 10px; }
+        .protein-tag { font-size: 0.8rem; background: #e8f5e9; color: #2e7d32; padding: 2px 6px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Músculo Py 🇵🇾</h1>
+
+    <div class="card">
+        <h2>Inventario Semanal Restante</h2>
+        <div id="inventory">
+            </div>
+    </div>
+
+    <button onclick="generateWeek()">🔄 Ordenar Semana Mágicamente</button>
+
+    <div id="plan" style="margin-top: 20px;">
+        </div>
+
+<script>
+    // Tu base de datos según el Excel
+    const stockInicial = {
+        pollo: 1500, // g
+        cerdo: 600,
+        higado: 400,
+        huevos: 36, // unidades
+        mani: 700
+    };
+
+    let currentStock = {...stockInicial};
+
+    const comidasLunch = ["Pollo + Lentejas", "Cerdo + Poroto", "Hígado + Mandioca"];
+    const comidasCena = ["Pollo + Ensalada", "Cerdo + Mandioca", "Tortilla de Huevo"];
+
+    function generateWeek() {
+        const planDiv = document.getElementById('plan');
+        planDiv.innerHTML = "<h2>Tu Menú de la Semana</h2>";
+        currentStock = {...stockInicial};
+        let higadoCount = 0;
+        let lastWasHigado = false;
+
+        const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+
+        dias.forEach(dia => {
+            let lunch = "";
+            let cena = "";
+
+            // Lógica para el Almuerzo
+            let r = Math.random();
+            if (r < 0.2 && higadoCount < 2 && !lastWasHigado) {
+                lunch = "Hígado Vacuno (200g)";
+                currentStock.higado -= 200;
+                higadoCount++;
+                lastWasHigado = true;
+            } else if (r < 0.6) {
+                lunch = "Pechuga de Pollo (150g) + Lentejas";
+                currentStock.pollo -= 150;
+                lastWasHigado = false;
+            } else {
+                lunch = "Paleta de Cerdo (150g) + Poroto";
+                currentStock.cerdo -= 150;
+                lastWasHigado = false;
+            }
+
+            // Cena
+            if (Math.random() > 0.5) {
+                cena = "Pechuga de Pollo (150g)";
+                currentStock.pollo -= 150;
+            } else {
+                cena = "Tortilla (3 Huevos Tipo S)";
+                currentStock.huevos -= 3;
+            }
+
+            planDiv.innerHTML += `
+                <div class="card day-box">
+                    <strong>${dia}</strong><br>
+                    ☀️ Almuerzo: ${lunch}<br>
+                    🌙 Cena: ${cena}
+                </div>
+            `;
+        });
+        updateInventory();
+    }
+
+    function updateInventory() {
+        const invDiv = document.getElementById('inventory');
+        invDiv.innerHTML = `
+            <div class="stock-item"><span>Pollo:</span> <span>${currentStock.pollo}g</span></div>
+            <div class="stock-item"><span>Cerdo:</span> <span>${currentStock.cerdo}g</span></div>
+            <div class="stock-item"><span>Hígado:</span> <span>${currentStock.higado}g</span></div>
+            <div class="stock-item"><span>Huevos:</span> <span>${currentStock.huevos}u</span></div>
+        `;
+    }
+
+    updateInventory();
+</script>
+</body>
+</html>
